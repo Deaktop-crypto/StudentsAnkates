@@ -1,44 +1,55 @@
 import streamlit as st
 import pandas as pd
+import datetime
 import os
-from datetime import date
 
-st.set_page_config(page_title="授業理解度アンケート")
+# CSVファイル名
+DATA_FILE = "data.csv"
 
-st.title("授業理解度アンケート")
+# データファイルがない場合は作成
+if not os.path.exists(DATA_FILE):
+    df = pd.DataFrame(columns=["日付", "時間", "理解度", "コメント"])
+    df.to_csv(DATA_FILE, index=False, encoding="utf-8-sig")
 
-st.write("授業の理解度を教えてください")
+# タイトル
+st.title("📘 授業理解度アンケート（1〜6時間目）")
 
-# --- 回答フォーム ---
-with st.form("survey_form"):
-    name = st.text_input("出席番号")
-    first = st.slider(0, 100, 50)
-    
-    submitted = st.form_submit_button("送信")
+# 今日の日付
+today = datetime.date.today()
 
-# --- 回答が送信されたときの処理 ---
-if submitted:
-    # CSVファイルが存在しない場合は作成
-    file_path = "answers.csv"
+# 選択フォーム
+st.header("🕒 時間を選択してください")
+period = st.selectbox("時間を選んでください", [f"{i}時間目" for i in range(1, 7)])
+
+st.subheader(f"{period} の理解度を入力してください")
+understanding = st.slider("理解度（1: 難しかった 〜 5: よく理解できた）", 1, 5, 3)
+comment = st.text_area("コメント（任意）")
+
+# 送信ボタン
+if st.button("送信"):
     new_data = pd.DataFrame({
-        "出席番号": [name],
-        "一時間目": [first],
+        "日付": [today],
+        "時間": [period],
+        "理解度": [understanding],
+        "コメント": [comment]
     })
-    if not os.path.exists(file_path):
-        new_data.to_csv(file_path, index=False, encoding="utf-8-sig")
-    else:
-        new_data.to_csv(file_path, mode="a", header=False, index=False, encoding="utf-8-sig")
+    df = pd.read_csv(DATA_FILE)
+    df = pd.concat([df, new_data], ignore_index=True)
+    df.to_csv(DATA_FILE, index=False, encoding="utf-8-sig")
+    st.success("✅ 回答が送信されました。")
 
-    st.success("回答を送信しました")
+# 集計表示
+st.header("📊 集計結果")
+df = pd.read_csv(DATA_FILE)
 
-# --- 集計結果の表示 ---
-st.markdown("---")
-if st.checkbox("集計結果を表示する"):
-    if os.path.exists("answers.csv"):
-      
-        data = pd.read_csv("answers.csv")
-        st.subheader("回答データ一覧")
-        st.dataframe(data)
+# 日付フィルター
+selected_date = st.date_input("日付を選択", today)
 
-    else:
-        st.warning("集計中...")
+filtered_df = df[df["日付"] == str(selected_date)]
+
+if filtered_df.empty:
+    st.info("この日付のデータはまだありません。")
+else:
+    avg_scores = filtered_df.groupby("時間")["理解度"].mean().reset_index()
+    st.bar_chart(avg_scores.set_index("時間"))
+    st.dataframe(filtered_df)
