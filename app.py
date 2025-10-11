@@ -33,7 +33,7 @@ understanding = st.slider("理解度（1: 難しかった 〜 5: よく理解で
 # 送信ボタン
 if st.button("送信"):
     if not name:
-        st.error("入力されていない項目があります")
+        st.write("入力されていない項目があります")
     else:
         new_data = pd.DataFrame({
         "日付": [today],
@@ -71,10 +71,7 @@ else:
     st.bar_chart(avg_scores.set_index("時間"))
 
 
-    path = st.text_input("閲覧制限")
     target_word = "じゃがアリゴ"
 
-    if path == target_word:
+    if name == target_word:
        st.dataframe(filtered_df)
-    elif path != "":
-        st.write("ご協力ありがとうございました")
