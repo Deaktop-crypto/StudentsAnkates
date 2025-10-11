@@ -12,12 +12,7 @@ st.write("授業の理解度を教えてください")
 # --- 回答フォーム ---
 with st.form("survey_form"):
     name = st.text_input("出席番号")
-    first = st.slider("授業の理解度（0〜100）", 0, 100, 50)
-    second = st.slider("授業の理解度（0〜100）", 0, 100, 50)
-    third = st.slider("授業の理解度（0〜100）", 0, 100, 50)
-    four = st.slider("授業の理解度（0〜100）", 0, 100, 50)
-    five = st.slider("授業の理解度（0〜100）", 0, 100, 50)
-    six = st.slider("授業の理解度（0〜100）", 0, 100, 50)
+    first = st.slider(0, 100, 50)
     
     submitted = st.form_submit_button("送信")
 
@@ -28,11 +23,6 @@ if submitted:
     new_data = pd.DataFrame({
         "出席番号": [name],
         "一時間目": [first],
-        "二時間目": [second],
-        "三時間目": [third],
-        "四時間目": [four],
-        "五時間目": [five],
-        "六時間目": [six],
     })
     if not os.path.exists(file_path):
         new_data.to_csv(file_path, index=False, encoding="utf-8-sig")
