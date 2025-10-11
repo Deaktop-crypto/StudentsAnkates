@@ -7,7 +7,7 @@ st.set_page_config(page_title="授業理解度アンケート")
 
 st.title("授業理解度アンケート")
 
-st.write("授業の理解度を教えてください。今後の授業改善の参考にします！")
+st.write("授業の理解度を教えてください")
 
 # --- 回答フォーム ---
 with st.form("survey_form"):
@@ -18,7 +18,6 @@ with st.form("survey_form"):
     four = st.slider("授業の理解度（0〜100）", 0, 100, 50)
     five = st.slider("授業の理解度（0〜100）", 0, 100, 50)
     six = st.slider("授業の理解度（0〜100）", 0, 100, 50)
-    date = date.today
     submitted = st.form_submit_button("送信")
 
 # --- 回答が送信されたときの処理 ---
@@ -33,7 +32,6 @@ if submitted:
         "四時間目": [four],
         "五時間目": [five],
         "六時間目": [six],
-        "日付": [date]
     })
     if not os.path.exists(file_path):
         new_data.to_csv(file_path, index=False, encoding="utf-8-sig")
