@@ -12,7 +12,7 @@ if not os.path.exists(DATA_FILE):
     df.to_csv(DATA_FILE, index=False, encoding="utf-8-sig")
 
 # タイトル
-st.title(" 授業理解度アンケート（1〜6時間目）")
+st.title(" 授業理解度アンケート ")
 
 # 今日の日付
 today = datetime.date.today()
@@ -51,4 +51,5 @@ else:
     avg_scores = filtered_df.groupby("時間")["理解度"].mean().reset_index()
     st.bar_chart(avg_scores.set_index("時間"))
     st.dataframe(filtered_df)
+
 
