@@ -72,5 +72,5 @@ else:
 
 
     path = st.text_input("閲覧制限")
-    if path == じゃがアリゴ:
+if path == じゃがアリゴ:
     st.dataframe(filtered_df)
