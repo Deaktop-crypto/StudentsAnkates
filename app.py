@@ -32,6 +32,9 @@ understanding = st.slider("理解度（1: 難しかった 〜 5: よく理解で
 
 # 送信ボタン
 if st.button("送信"):
+    if not name:
+        st.error("入力されていない項目があります")
+    else:
     new_data = pd.DataFrame({
         "日付": [today],
         "時間": [period],
@@ -66,5 +69,5 @@ if filtered_df.empty:
 else:
     avg_scores = filtered_df.groupby("時間")["理解度"].mean().reset_index()
     st.bar_chart(avg_scores.set_index("時間"))
+    
     st.dataframe(filtered_df)
-
