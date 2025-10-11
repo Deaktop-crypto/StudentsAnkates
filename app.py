@@ -5,14 +5,11 @@ import os
 
 # CSVファイル名
 DATA_FILE = "data.csv"
-DATA_FILE2 = "data.csv"
 
 # データファイルがない場合は作成
 if not os.path.exists(DATA_FILE):
     df = pd.DataFrame(columns=["日付", "時間", "理解度"])
-    df2 = pd.DataFrame(columns=["出席番号", "日付", "時間", "理解度"])
-    df.to_csv(DATA_FILE, index=False, encoding="utf-8-sig")
-    df2.to_csv(DATA_FILE2, index=False, encoding="utf-8-sig")                   
+    df.to_csv(DATA_FILE, index=False, encoding="utf-8-sig")               
 
 # タイトル
 st.title(" 授業理解度アンケート ")
@@ -49,9 +46,6 @@ if st.button("送信"):
     df = pd.read_csv(DATA_FILE)
     df = pd.concat([df, new_data], ignore_index=True)
     df.to_csv(DATA_FILE, index=False, encoding="utf-8-sig")
-    df2 = pd.read_csv(DATA_FILE2)
-    df2 = pd.concat([df2, new_data2], ignore_index=True)
-    df2.to_csv(DATA_FILE2, index=False, encoding="utf-8-sig")
     st.success(" 回答が送信されました。")
 
 # 集計表示
@@ -71,7 +65,7 @@ else:
     st.bar_chart(avg_scores.set_index("時間"))
 
 
-    target_word = "じゃがアリゴ"
-
-    if name == target_word:
-       st.dataframe(filtered_df)
+　　ruler`s_key = "めざせ理解度オール5!"
+　　path = st.text_input("管理者権限:")
+    if path == ruler`s_key:
+      st.write(filtered_df)
