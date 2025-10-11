@@ -19,7 +19,7 @@ today = datetime.date.today()
 
 # 選択フォーム
 st.header("出席番号")
-name = st.text_area("出席番号")
+name = st.text_input("出席番号")
 
 st.subheader(" 時間を選択してください")
 period = st.selectbox("時間を選んでください", [f"{i}時間目" for i in range(1, 7)])
@@ -55,6 +55,3 @@ else:
     avg_scores = filtered_df.groupby("時間")["理解度"].mean().reset_index()
     st.bar_chart(avg_scores.set_index("時間"))
     st.dataframe(filtered_df)
-
-
-
