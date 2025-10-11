@@ -18,6 +18,7 @@ with st.form("survey_form"):
     four = st.slider("授業の理解度（0〜100）", 0, 100, 50)
     five = st.slider("授業の理解度（0〜100）", 0, 100, 50)
     six = st.slider("授業の理解度（0〜100）", 0, 100, 50)
+    
     submitted = st.form_submit_button("送信")
 
 # --- 回答が送信されたときの処理 ---
