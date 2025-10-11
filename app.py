@@ -72,5 +72,9 @@ else:
 
 
     path = st.text_input("閲覧制限")
-if path == じゃがアリゴ:
-    st.dataframe(filtered_df)
+    target_word = "じゃがアリゴ"
+
+    if path == target_word:
+       st.dataframe(filtered_df)
+    elif path != "":
+        st.write("ご協力ありがとうございました")
