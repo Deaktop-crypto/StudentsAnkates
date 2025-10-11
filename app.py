@@ -35,7 +35,7 @@ if st.button("送信"):
     if not name:
         st.error("入力されていない項目があります")
     else:
-    new_data = pd.DataFrame({
+        new_data = pd.DataFrame({
         "日付": [today],
         "時間": [period],
         "理解度": [understanding]
@@ -71,3 +71,4 @@ else:
     st.bar_chart(avg_scores.set_index("時間"))
     
     st.dataframe(filtered_df)
+
