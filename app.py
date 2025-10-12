@@ -8,7 +8,7 @@ DATA_FILE = "data.csv"
 
 # データファイルがない場合は作成
 if not os.path.exists(DATA_FILE):
-    df = pd.DataFrame(columns=["日付", "時間", "理解度"])
+    df = pd.DataFrame(columns=["出席番号","日付", "時間", "理解度"])
     df.to_csv(DATA_FILE, index=False, encoding="utf-8-sig")               
 
 # タイトル
@@ -33,15 +33,10 @@ if st.button("送信"):
         st.write("入力されていない項目があります")
     else:
         new_data = pd.DataFrame({
+         "出席番号":[name],
         "日付": [today],
         "時間": [period],
         "理解度": [understanding]
-    })
-    new_data2 = pd.DataFrame({
-        "出席番号":[name],
-        "日付":[today],
-        "時間":[period],
-        "理解度":[understanding]
     })
     df = pd.read_csv(DATA_FILE)
     df = pd.concat([df, new_data], ignore_index=True)
@@ -64,8 +59,6 @@ else:
     avg_scores = filtered_df.groupby("時間")["理解度"].mean().reset_index()
     st.bar_chart(avg_scores.set_index("時間"))
 
-
-　　ruler`s_key = "めざせ理解度オール5!"
 　　path = st.text_input("管理者権限:")
-    if path == ruler`s_key:
-      st.write(filtered_df)
+    if path == "イチジクのタルト":
+      st.dataframe(filtered_df)
