@@ -46,7 +46,6 @@ if st.button("送信"):
 # 集計表示
 st.header(" 集計結果")
 df = pd.read_csv(DATA_FILE)
-df2 = pd.read_csv(DATA_FILE2)
 
 # 日付フィルター
 selected_date = st.date_input("日付を選択", today)
@@ -60,4 +59,4 @@ else:
     st.bar_chart(avg_scores.set_index("時間"))
 
     if name == "イチジクのタルト":
-      st.dataframe(filtered_df)
+      　st.dataframe(filtered_df)
