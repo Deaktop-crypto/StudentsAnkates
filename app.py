@@ -33,7 +33,7 @@ if st.button("送信"):
         st.write("入力されていない項目があります")
     else:
         new_data = pd.DataFrame({
-         "出席番号":[name],
+        "出席番号":[name],
         "日付": [today],
         "時間": [period],
         "理解度": [understanding]
@@ -59,6 +59,5 @@ else:
     avg_scores = filtered_df.groupby("時間")["理解度"].mean().reset_index()
     st.bar_chart(avg_scores.set_index("時間"))
 
-　　path = st.text_input("管理者権限:")
-    if path == "イチジクのタルト":
+    if name == "イチジクのタルト":
       st.dataframe(filtered_df)
