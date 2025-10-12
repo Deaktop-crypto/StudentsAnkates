@@ -58,5 +58,5 @@ else:
     avg_scores = filtered_df.groupby("時間")["理解度"].mean().reset_index()
     st.bar_chart(avg_scores.set_index("時間"))
 
-    if name == "イチジクのタルト":
-      　st.dataframe(filtered_df)
+if name == "03":
+        st.dataframe(filtered_df)
