@@ -22,15 +22,15 @@ name = st.text_input("出席番号")
 
 st.subheader("曜日を選択してください")
 youbi = ['月曜日','火曜日','水曜日','木曜日','金曜日']
-period = st.selectbox("", youbi, index=None)
+period = st.selectbox("", youbi, index=0)
 
 time = ['一時間目','二時間目','三時間目','四時間目','五時間目','六時間目']
 st.subheader(f"{period} の時間を選択してください")
-understanding = st.selectbox("", time, index=None)
+understanding = st.selectbox("", time, index=0)
 
 if st.button("送信"):
     if not name:
-        st.write("入力されていない項目があります")
+        st.warning("入力されていない項目があります")
     else:
         new_data = pd.DataFrame({
             "出席番号":[name],
@@ -47,18 +47,20 @@ if st.button("送信"):
 st.header("集計結果")
 df = pd.read_csv(DATA_FILE)
 
-month_options = ['10','11','12','1','2','3']
+month_options = sorted(df["月"].unique())
+week_options = sorted(df["週"].unique())
 selected_month = st.selectbox("月を選択してください", month_options, index=None)
-week_options = ['1','2','3','4']
 selected_week = st.selectbox("何週目かを選択してください", week_options, index=None)
 
-filtered_df = df[(df["月"] == str(selected_month)) & (df["週"] == str(selected_week))]
-
-if filtered_df.empty:
-    st.info("この日付のデータはまだありません。")
+if selected_mobth and selected_week:
+    filtered_df = df[(df["月"] == selected_month) & (df["週"] == selected_week)]
+    if filtered_df.empty:
+        st.info("empty box")
 else:
-    graph = filtered_df.groupby("曜日")["時間"].count().reset_index()
-    st.bar_chart(graph.set_index("曜日"))
+    st.write(f"{selected_month}月 第{selected_week週の結果}")
+    result = filterd_df.groupby("曜日")["時間"].count().reset_index()
+    st.bar_chart(result.set_index("曜日"))
+
 
 if name == "イチジクのタルト":
     st.dataframe(filtered_df)
