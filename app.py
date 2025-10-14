@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import datetime
-import calender
+import calendar
 import os
 
 DATA_FILE = "data.csv"
@@ -36,9 +36,9 @@ if st.button("送信"):
     else:
         new_data = pd.DataFrame({
         "出席番号":[name],
-        "週": [weeknumber],
+        "週": [week_number],
         "月":[month],
-        "曜日": [youbi],
+        "曜日": [period],
         "時間": [understanding]
     })
     df = pd.read_csv(DATA_FILE)
@@ -55,7 +55,7 @@ selected_month = st.selectbox("月を選択してください", month_options, i
 week_options = ['1','2','3','4']
 selected_week = st.selectbox("何週目かを選択してください", week_options, index = None)
 
-filtered_df = df[(df["月"] == str(selected_month)) && (["週"] == str(selected_week))]
+filtered_df = df[(df["月"] == str(selected_month)) & (df["週"] == str(selected_week))]
 
 if filtered_df.empty:
     st.info("この日付のデータはまだありません。")
