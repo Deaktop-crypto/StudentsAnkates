@@ -51,8 +51,8 @@ df = pd.read_csv(DATA_FILE)
 
 month_options = sorted(df["月"].unique())
 week_options = sorted(df["週"].unique())
-selected_month = st.selectbox("月を選択してください", month_options, index=1)
-selected_week = st.selectbox("何週目かを選択してください", week_options, index=1)
+selected_month = st.selectbox("月を選択してください", month_options, index=None)
+selected_week = st.selectbox("何週目かを選択してください", week_options, index=None)
 
 if selected_month is not None and selected_week is not None:
     filtered_df = df[(df["月"] == selected_month) & (df["週"] == selected_week)]
@@ -65,4 +65,5 @@ if selected_month is not None and selected_week is not None:
 
 if name == "イチジクのタルト":
     st.dataframe(df)
+
 
