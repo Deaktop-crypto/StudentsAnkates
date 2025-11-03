@@ -64,7 +64,8 @@ if selected_month is not None and selected_week is not None:
     else:
         st.write(f"{selected_month}月 第{selected_week}週 {selected_days} の結果")
 
-        st.bar_chart(new_data.set_index("時間"))
+        st.bar_chart(df.set_index("時間"))
 
 if name == "イチジクのタルト":
     st.dataframe(df)
+
