@@ -33,5 +33,6 @@ if st.button("送信"):
 
     st.success("アンケートを送信しました")
 
-if df.date == "2025-9-9":
+target_date = "2025-9-9"
+if date == target_date:
     st.write("イチジクのタルト")
