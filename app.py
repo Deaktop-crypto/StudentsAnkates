@@ -49,23 +49,5 @@ if st.button("送信"):
 st.header("集計結果")
 df = pd.read_csv(DATA_FILE)
 
-month_options = sorted(df["月"].unique())
-week_options = sorted(df["週"].unique())
-days_options = sorted(df["曜日"].unique())
-
-selected_month = st.selectbox("月を選択してください", month_options, index=None)
-selected_week = st.selectbox("何週目かを選択してください", week_options, index=None)
-selected_days = st.selectbox("何曜日かを選択してください", days_options, index=None)
-
-if selected_month is not None and selected_week is not None:
-    filtered_df = df[(df["月"] == selected_month) & (df["週"] == selected_week) & (df["曜日"] == selected_days)]
-    if filtered_df.empty:
-        st.info("該当データがありません。")
-    else:
-        st.write(f"{selected_month}月 第{selected_week}週 {selected_days} の結果")
-        grouped = df.groupby(["月","週","曜日","時間"]).size().reset_index(name="件数")
-        st.dataframe(grouped)
-        st.bar_chart(grouped, x="時間", Y="件数")　
-
 if name == "イチジクのタルト":
     st.dataframe(df)
