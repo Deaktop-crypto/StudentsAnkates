@@ -55,7 +55,7 @@ selected_month = st.selectbox("月を選択してください", month_options, i
 selected_week = st.selectbox("何週目かを選択してください", week_options, index=None)
 
 if selected_month is not None and selected_week is not None:
-    filtered_df = df[(df["月"] == selected_month) & (df["週"] == selected_week) & (df["曜日") == selected_days)]
+    filtered_df = df[(df["月"] == selected_month) & (df["週"] == selected_week) & (df["曜日"] == selected_days)]
     if filtered_df.empty:
         st.info("該当データがありません。")
     else:
@@ -65,4 +65,5 @@ if selected_month is not None and selected_week is not None:
 
 if name == "イチジクのタルト":
     st.dataframe(df)
+
 
