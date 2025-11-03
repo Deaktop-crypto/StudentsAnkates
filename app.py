@@ -33,6 +33,7 @@ if st.button("送信"):
 
     st.success("アンケートを送信しました")
 
-if df.num = "イチジクのタルト":
+if df.num == "イチジクのタルト":
     st.write("イチジクのタルト")
+
 
