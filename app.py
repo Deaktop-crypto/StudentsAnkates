@@ -63,9 +63,8 @@ if selected_month is not None and selected_week is not None:
         st.info("該当データがありません。")
     else:
         st.write(f"{selected_month}月 第{selected_week}週 {selected_days} の結果")
-        result = filtered_df.groupby("時間").count().reset_index()
+
         st.bar_chart(result.set_index("時間"))
 
 if name == "イチジクのタルト":
     st.dataframe(df)
-
