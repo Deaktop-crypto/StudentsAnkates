@@ -64,6 +64,7 @@ if selected_month is not None and selected_week is not None:
     else:
         st.write(f"{selected_month}月 第{selected_week}週 {selected_days} の結果")
         grouped = df.groupby(["月","週","曜日","時間"]).size().reset_index(name="件数")
+        st.dataframe(grouped)
         st.bar_chart(grouped, x="時間", Y="件数")　
 
 if name == "イチジクのタルト":
