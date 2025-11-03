@@ -33,7 +33,5 @@ if st.button("送信"):
 
     st.success("アンケートを送信しました")
 
-if df.num == "イチジクのタルト":
+if df.date == "2025-9-9":
     st.write("イチジクのタルト")
-
-
