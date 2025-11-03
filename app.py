@@ -35,6 +35,7 @@ if st.button("送信"):
 
 target_date = datetime.date(2025, 9, 9)
 if date == target_date:
-    selected_date = st.date_input("日付を選択", today)
+    selected_date = st.date_input("日付を選択",)
     filtered_df = df[df["日付"] == str(selected_date)]
     st.dataframe(filtered_df)
+
