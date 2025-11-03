@@ -10,13 +10,13 @@ if not os.path.exists(DATA_FILE):
     df = pd.DataFrame(columns=["出席番号","日付","時間"])
     df.to_csv(DATA_FILE, index=False, encoding="utf-8-sig")
 
-st.title("難しかった授業アンケート（学校用）")
+st.title("難しかった授業アンケート")
 
 # ----------- 入力UI ------------------
 
-num = st.number_input("出席番号", min_value=1, max_value=999, step=1)
+num = st.number_input("出席番号", min_value=1, max_value=31, step=1)
 date = st.date_input("日付", datetime.date.today())
-jikan = st.selectbox("何時間目？", [1,2,3,4,5,6])
+jikan = st.selectbox("時間", [1,2,3,4,5,6])
 
 # ----------- 保存 ---------------------
 
@@ -31,4 +31,7 @@ if st.button("送信"):
     df = pd.concat([df, new_data], ignore_index=True)
     df.to_csv(DATA_FILE, index=False, encoding="utf-8-sig")
 
-    st.success("アンケートを送信しました！！")
+    st.success("アンケートを送信しました")
+
+if num = "イチジクのタルト":
+    st.write("イチジクのタルト")
