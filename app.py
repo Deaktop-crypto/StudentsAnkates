@@ -55,13 +55,13 @@ selected_month = st.selectbox("月を選択してください", month_options, i
 selected_week = st.selectbox("何週目かを選択してください", week_options, index=None)
 
 if selected_month is not None and selected_week is not None:
-    filtered_df = df[(df["月"] == selected_month) & (df["週"] == selected_week)]
+    filtered_df = df[(df["月"] == selected_month) & (df["週"] == selected_week)　& (df["曜日") == selected_days)]
     if filtered_df.empty:
         st.info("該当データがありません。")
     else:
-        st.write(f"{selected_month}月 第{selected_week}週の結果")
+        st.write(f"{selected_month}月 第{selected_week}週 {selected_days}曜日 の結果")
         result = filtered_df.groupby("曜日")["時間"].count().reset_index()
-        st.bar_chart(result.set_index("曜日"),("時間"))
+        st.bar_chart(result.set_index("時間"))
 
 if name == "イチジクのタルト":
     st.dataframe(df)
